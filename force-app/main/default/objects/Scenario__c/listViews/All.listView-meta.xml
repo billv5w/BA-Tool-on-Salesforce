@@ -4,7 +4,6 @@
     <columns>NAME</columns>
     <columns>CombinedScenario__c</columns>
     <columns>Rule__c</columns>
-    <columns>AppliedRule__c</columns>
     <columns>UPDATEDBY_USER</columns>
     <columns>LAST_UPDATE</columns>
     <filterScope>Everything</filterScope>

@@ -2,12 +2,13 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>CombinedRule__c</fullName>
     <externalId>false</externalId>
-    <formula>Factor1__c + 
-	IF(ISBLANK(Factor2__c),&apos;, &apos;, &apos;, &apos; + Factor2__c) +
-		IF(ISBLANK(Factor3__c),&apos;, &apos;, &apos;, &apos; + Factor3__c) +
-			IF(ISBLANK(Factor4__c),&apos;, &apos;, &apos;, &apos; + Factor4__c) +
-				IF(ISBLANK(Factor5__c),&apos;, &apos;, &apos;, &apos; + Factor5__c) +
-					IF(ISBLANK(Factor6__c),&apos;, &apos;, &apos;, &apos; + Factor6__c)</formula>
+    <formula
+  >IF(ISBLANK(Factor1__c), &apos;&apos;, Factor1__c + &apos;, &apos;) +
+	IF(ISBLANK(Factor2__c),&apos;&apos;, Factor2__c + &apos;, &apos;) +
+		IF(ISBLANK(Factor3__c),&apos;&apos;, Factor3__c + &apos;, &apos;) +
+			IF(ISBLANK(Factor4__c),&apos;&apos;, Factor4__c + &apos;, &apos;) +
+				IF(ISBLANK(Factor5__c),&apos;&apos;, Factor5__c + &apos;, &apos;) +
+					IF(ISBLANK(Factor6__c),&apos;&apos;, Factor6__c + &apos;,&apos;)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Combined Rule</label>
     <required>false</required>
