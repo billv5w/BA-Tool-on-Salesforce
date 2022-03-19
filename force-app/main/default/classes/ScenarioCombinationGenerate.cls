@@ -30,7 +30,9 @@ public with sharing class ScenarioCombinationGenerate {
               for (Integer e = 0; e < f5Size; e++) {
                 for (Integer f = 0; f < f6Size; f++) {
                   Scenario__c scenario = new Scenario__c(
-                    Name = nameprefix + '_' + count,
+                    Name = nameprefix +
+                      '_' +
+                      String.valueOf(count).leftPad(5, '0'),
                     Factor1__c = factor1[a],
                     Factor2__c = factor2[b],
                     factor3__c = factor3[c],
