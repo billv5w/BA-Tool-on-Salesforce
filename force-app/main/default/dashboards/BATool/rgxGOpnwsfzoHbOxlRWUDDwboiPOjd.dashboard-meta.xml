@@ -37,7 +37,6 @@
     </dashboardGridLayout>
     <dashboardType>LoggedInUser</dashboardType>
     <isGridLayout>true</isGridLayout>
-    <runningUser>test-t7gex6ay0w7c@example.com</runningUser>
     <textColor>#000000</textColor>
     <title>BA overview</title>
     <titleColor>#000000</titleColor>
