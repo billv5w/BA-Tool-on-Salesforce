@@ -41,6 +41,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Rule__c.Order__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Scenario__c.AppliedRule__c</field>
         <readable>true</readable>
     </fieldPermissions>
