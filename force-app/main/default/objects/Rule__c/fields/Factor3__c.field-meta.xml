@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>AppliedRule__c</fullName>
-    <description>Used for multiple rules applied.</description>
+    <fullName>Factor3__c</fullName>
     <encryptionScheme>None</encryptionScheme>
     <externalId>false</externalId>
-    <label>Multiple Applied Rule</label>
+    <label>Factor3</label>
     <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
