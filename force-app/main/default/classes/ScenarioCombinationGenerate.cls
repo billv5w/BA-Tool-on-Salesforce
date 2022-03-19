@@ -7,6 +7,8 @@ public with sharing class ScenarioCombinationGenerate {
     for (FlowInputParameters input : inputList) {
       FlowOutputParameters output = new FlowOutputParameters();
       List<Scenario__c> scenarios = new List<Scenario__c>();
+      Integer count = 1;
+      String namePrefix = input.name;
       List<String> factor1 = input.factor1;
       List<String> factor2 = input.factor2;
       List<String> factor3 = input.factor3;
@@ -28,6 +30,7 @@ public with sharing class ScenarioCombinationGenerate {
               for (Integer e = 0; e < f5Size; e++) {
                 for (Integer f = 0; f < f6Size; f++) {
                   Scenario__c scenario = new Scenario__c(
+                    Name = nameprefix + '_' + count,
                     Factor1__c = factor1[a],
                     Factor2__c = factor2[b],
                     factor3__c = factor3[c],
@@ -35,6 +38,7 @@ public with sharing class ScenarioCombinationGenerate {
                     factor5__c = factor5[e],
                     factor6__c = factor6[f]
                   );
+                  count++;
                   scenarios.add(scenario);
                 }
               }
@@ -50,6 +54,9 @@ public with sharing class ScenarioCombinationGenerate {
 
   /* Input parameters for the Apex action */
   public class FlowInputParameters {
+    @InvocableVariable(label='Scenario Name' required=true)
+    public String name;
+
     @InvocableVariable(label='Factor1 collection' required=true)
     public List<String> factor1;
 
