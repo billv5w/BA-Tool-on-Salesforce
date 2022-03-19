@@ -56,7 +56,7 @@
         </rules>
     </decisions>
     <interviewLabel>Collect Elements {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Collect Elements</label>
+    <label>BA sub Collect Elements</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

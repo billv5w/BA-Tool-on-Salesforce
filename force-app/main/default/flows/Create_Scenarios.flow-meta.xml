@@ -155,7 +155,7 @@
     <description
   >Collect 6 factors to create all possible scenarios.</description>
     <interviewLabel>Create Scenarios {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Create Scenarios</label>
+    <label>BA Create Scenarios</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

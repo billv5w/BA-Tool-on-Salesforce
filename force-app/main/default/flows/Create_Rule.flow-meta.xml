@@ -63,6 +63,13 @@
             </value>
         </assignmentItems>
         <assignmentItems>
+            <assignToReference>rule.Outcome__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Outcome</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
             <assignToReference>orderCount</assignToReference>
             <operator>Add</operator>
             <value>
@@ -122,7 +129,7 @@
         <scale>0</scale>
     </formulas>
     <interviewLabel>Create Rule {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Create Rule</label>
+    <label>BA Create Rule</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -223,6 +230,13 @@
             <name>Factor6_element</name>
             <dataType>String</dataType>
             <fieldText>Factor6 element</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Outcome</name>
+            <dataType>String</dataType>
+            <fieldText>Outcome</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
         </fields>

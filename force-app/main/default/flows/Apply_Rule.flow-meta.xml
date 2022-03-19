@@ -27,7 +27,7 @@
     </actionCalls>
     <apiVersion>54.0</apiVersion>
     <interviewLabel>Apply Rule {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Apply Rule</label>
+    <label>BA Apply Rule</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

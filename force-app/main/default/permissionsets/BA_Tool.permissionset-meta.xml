@@ -51,6 +51,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Rule__c.Outcome__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Scenario__c.AppliedRule__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -87,6 +92,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Scenario__c.Factor6__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Scenario__c.RuleOutcome__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

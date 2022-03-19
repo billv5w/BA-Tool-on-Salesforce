@@ -19,6 +19,10 @@
                 <behavior>Edit</behavior>
                 <field>AppliedRule__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>RuleOutcome__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
