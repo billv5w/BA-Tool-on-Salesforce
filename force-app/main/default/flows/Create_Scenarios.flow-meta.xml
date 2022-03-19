@@ -3,12 +3,12 @@
     <actionCalls>
         <name>Create_Scenario_Records</name>
         <label>Create Scenario Records</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>1718</locationY>
         <actionName>ScenarioCombinationGenerate</actionName>
         <actionType>apex</actionType>
         <connector>
-            <targetReference>Create_Scenarios</targetReference>
+            <targetReference>Assign_Count</targetReference>
         </connector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
@@ -57,9 +57,26 @@
     </actionCalls>
     <apiVersion>54.0</apiVersion>
     <assignments>
+        <name>Assign_Count</name>
+        <label>Assign Count</label>
+        <locationX>182</locationX>
+        <locationY>1838</locationY>
+        <assignmentItems>
+            <assignToReference>scenarioCount</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference
+        >Create_Scenario_Records.records</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_List1</name>
         <label>Assign List1</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>278</locationY>
         <assignmentItems>
             <assignToReference>currentList</assignToReference>
@@ -75,7 +92,7 @@
     <assignments>
         <name>Assign_List2</name>
         <label>Assign List2</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>518</locationY>
         <assignmentItems>
             <assignToReference>currentList</assignToReference>
@@ -91,7 +108,7 @@
     <assignments>
         <name>Assign_List3</name>
         <label>Assign List3</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>758</locationY>
         <assignmentItems>
             <assignToReference>currentList</assignToReference>
@@ -107,7 +124,7 @@
     <assignments>
         <name>Assign_List4</name>
         <label>Assign List4</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>998</locationY>
         <assignmentItems>
             <assignToReference>currentList</assignToReference>
@@ -123,7 +140,7 @@
     <assignments>
         <name>Assign_List5</name>
         <label>Assign List5</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>1238</locationY>
         <assignmentItems>
             <assignToReference>currentList</assignToReference>
@@ -139,7 +156,7 @@
     <assignments>
         <name>Assign_List6</name>
         <label>Assign List6</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>1478</locationY>
         <assignmentItems>
             <assignToReference>currentList</assignToReference>
@@ -152,6 +169,31 @@
             <targetReference>collect_Elements_for_Factor6</targetReference>
         </connector>
     </assignments>
+    <decisions>
+        <name>Decision</name>
+        <label>Decision</label>
+        <locationX>182</locationX>
+        <locationY>1958</locationY>
+        <defaultConnector>
+            <targetReference>TooManyScreen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Less_than_10k</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>scenarioCount</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>10000.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Scenarios</targetReference>
+            </connector>
+            <label>Less than 10k</label>
+        </rules>
+    </decisions>
     <description
   >Collect 6 factors to create all possible scenarios.</description>
     <interviewLabel>Create Scenarios {!$Flow.CurrentDateTime}</interviewLabel>
@@ -178,8 +220,8 @@
     <recordCreates>
         <name>Create_Scenarios</name>
         <label>Create Scenarios</label>
-        <locationX>176</locationX>
-        <locationY>1838</locationY>
+        <locationX>50</locationX>
+        <locationY>2078</locationY>
         <connector>
             <targetReference>EndScreen</targetReference>
         </connector>
@@ -188,15 +230,15 @@
     <screens>
         <name>EndScreen</name>
         <label>End Screen</label>
-        <locationX>176</locationX>
-        <locationY>1958</locationY>
+        <locationX>50</locationX>
+        <locationY>2198</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>msg</name>
             <fieldText
-      >&lt;p&gt;You scenarios have been created.&lt;/p&gt;</fieldText>
+      >&lt;p&gt;All {!scenarioCount} possible scenarios have been created.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -205,7 +247,7 @@
     <screens>
         <name>StartScreen</name>
         <label>Start Screen</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>158</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -223,8 +265,25 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
+    <screens>
+        <name>TooManyScreen</name>
+        <label>Too Many Screen</label>
+        <locationX>314</locationX>
+        <locationY>2078</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>msg_0</name>
+            <fieldText
+      >&lt;p&gt;Possible scenarios ({!scenarioCount}) have exceeded 10000. Please try to reduce them.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>56</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>StartScreen</targetReference>
@@ -234,7 +293,7 @@
     <subflows>
         <name>collect_Elements_for_Factor1</name>
         <label>collect Elements for Factor1</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>398</locationY>
         <connector>
             <targetReference>Assign_List2</targetReference>
@@ -254,7 +313,7 @@
     <subflows>
         <name>collect_Elements_for_Factor2</name>
         <label>collect Elements for Factor2</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>638</locationY>
         <connector>
             <targetReference>Assign_List3</targetReference>
@@ -274,7 +333,7 @@
     <subflows>
         <name>collect_Elements_for_Factor3</name>
         <label>collect Elements for Factor3</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>878</locationY>
         <connector>
             <targetReference>Assign_List4</targetReference>
@@ -294,7 +353,7 @@
     <subflows>
         <name>collect_Elements_for_Factor4</name>
         <label>collect Elements for Factor4</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>1118</locationY>
         <connector>
             <targetReference>Assign_List5</targetReference>
@@ -314,7 +373,7 @@
     <subflows>
         <name>collect_Elements_for_Factor5</name>
         <label>collect Elements for Factor5</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>1358</locationY>
         <connector>
             <targetReference>Assign_List6</targetReference>
@@ -334,7 +393,7 @@
     <subflows>
         <name>collect_Elements_for_Factor6</name>
         <label>collect Elements for Factor6</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>1598</locationY>
         <connector>
             <targetReference>Create_Scenario_Records</targetReference>
@@ -399,5 +458,13 @@
         <isCollection>true</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>scenarioCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
     </variables>
 </Flow>

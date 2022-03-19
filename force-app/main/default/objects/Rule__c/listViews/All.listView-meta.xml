@@ -3,8 +3,8 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>CombinedRule__c</columns>
+    <columns>Outcome__c</columns>
     <columns>Order__c</columns>
-    <columns>UPDATEDBY_USER</columns>
     <columns>LAST_UPDATE</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>

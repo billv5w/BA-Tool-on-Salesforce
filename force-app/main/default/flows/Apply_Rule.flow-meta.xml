@@ -26,6 +26,29 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <apiVersion>54.0</apiVersion>
+    <assignments>
+        <name>Assign_Count</name>
+        <label>Assign Count</label>
+        <locationX>176</locationX>
+        <locationY>638</locationY>
+        <assignmentItems>
+            <assignToReference>scenarioCount</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference
+        >Check_Scenario_Records.records</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>EndScreen</targetReference>
+        </connector>
+    </assignments>
+    <formulas>
+        <name>prefix</name>
+        <dataType>String</dataType>
+        <expression
+    >TRIM(LEFT({!recordId.Name} ,Find(&quot;-&quot;, {!recordId.Name})-1))</expression>
+    </formulas>
     <interviewLabel>Apply Rule {!$Flow.CurrentDateTime}</interviewLabel>
     <label>BA Apply Rule</label>
     <processMetadataValues>
@@ -74,8 +97,28 @@
         <label>Update Scenarios</label>
         <locationX>176</locationX>
         <locationY>518</locationY>
+        <connector>
+            <targetReference>Assign_Count</targetReference>
+        </connector>
         <inputReference>Check_Scenario_Records.records</inputReference>
     </recordUpdates>
+    <screens>
+        <name>EndScreen</name>
+        <label>End Screen</label>
+        <locationX>176</locationX>
+        <locationY>758</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>endMsg</name>
+            <fieldText
+      >&lt;p&gt;The current rule has been applied to {!scenarioCount} scenarios.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <name>StartScreen</name>
         <label>StartScreen</label>
@@ -90,6 +133,9 @@
         <fields>
             <name>scenarioName</name>
             <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>prefix</elementReference>
+            </defaultValue>
             <fieldText>Scenario Name Prefix</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -118,5 +164,13 @@
         <isInput>true</isInput>
         <isOutput>false</isOutput>
         <objectType>Rule__c</objectType>
+    </variables>
+    <variables>
+        <name>scenarioCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
     </variables>
 </Flow>

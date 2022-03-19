@@ -4,7 +4,8 @@
     <columns>NAME</columns>
     <columns>CombinedScenario__c</columns>
     <columns>Rule__c</columns>
-    <columns>UPDATEDBY_USER</columns>
+    <columns>RuleOutcome__c</columns>
+    <columns>ManualOutcome__c</columns>
     <columns>LAST_UPDATE</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>

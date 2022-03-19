@@ -89,7 +89,8 @@
         </connector>
         <fields>
             <name>CurrentLabel</name>
-            <fieldText>&lt;p&gt;Current: {!currentList}&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;Current factor list: &lt;b&gt;{!currentList}&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -102,7 +103,7 @@
         <fields>
             <name>Last_element</name>
             <dataType>Boolean</dataType>
-            <fieldText>Last element</fieldText>
+            <fieldText>Last element in this factor list?</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
         </fields>
@@ -137,5 +138,12 @@
         <isCollection>true</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>noMoreList</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
     </variables>
 </Flow>
