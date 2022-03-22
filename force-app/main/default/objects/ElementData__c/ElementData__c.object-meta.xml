@@ -153,14 +153,15 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Rule</label>
+    <label>Element Data</label>
     <nameField>
-        <label>Rule Name</label>
+        <label>Element Data Name</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Rules</pluralLabel>
+    <pluralLabel>Element Data</pluralLabel>
     <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
     <visibility>Public</visibility>
 </CustomObject>

@@ -20,10 +20,14 @@ private class RuleApplyingCheckTest {
       scenarios.addAll(output.records);
     }
     insert scenarios;
-    //   List<Rule__c> rules = new List<Rule__c>();
-    //   Rule__c rule1 = new Rule__c(Name = 'Rule - 1', factor1 = 'A', factor2 = 'b2');
-    //   rules.add(rule1);
-    //   insert rules;
+    // List<Rule__c> rules = new List<Rule__c>();
+    // Rule__c rule1 = new Rule__c(Name = 'Rule - 1', factor1 = 'A', factor2 = 'b2', order__c = 1);
+    // Rule__c rule2 = new Rule__c(Name = 'Rule - 2', factor1 = 'A', factor2 = 'b2', order__c = 2);
+    // Rule__c rule3 = new Rule__c(Name = 'Rule - 3', factor1 = 'A', factor2 = 'b2', order__c = 3);
+    // rules.add(rule1);
+    // rules.add(rule2);
+    // rules.add(rule3);
+    // insert rules;
   }
   @isTest
   public static void testRule1() {
