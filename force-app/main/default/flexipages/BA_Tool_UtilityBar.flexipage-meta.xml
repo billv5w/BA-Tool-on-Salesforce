@@ -17,6 +17,52 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>flowName</name>
+                    <value>BAT_Collect_Elements</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>height</name>
+                    <type>decorator</type>
+                    <value>480</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>icon</name>
+                    <type>decorator</type>
+                    <value>all</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <type>decorator</type>
+                    <value>Collect Components</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>scrollable</name>
+                    <type>decorator</type>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>width</name>
+                    <type>decorator</type>
+                    <value>340</value>
+                </componentInstanceProperties>
+                <componentName>flowruntime:interview</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>eager</name>
+                    <type>decorator</type>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>flowArguments</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>flowLayout</name>
+                    <value>oneColumn</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>flowName</name>
                     <value>BAT_Create_Scenarios</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>

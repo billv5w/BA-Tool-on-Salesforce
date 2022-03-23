@@ -6,7 +6,6 @@ public with sharing class RulesToScenariosCheck {
     List<FlowOutputParameters> result = new List<FlowOutputParameters>();
     for (FlowInputParameters input : inputList) {
       FlowOutputParameters output = new FlowOutputParameters();
-      List<Scenario__c> outputScenarios = new List<Scenario__c>();
       String ruleName = input.rule + '%';
       String scenarioName = input.scenario + '%';
       List<Rule__c> rules = [
@@ -22,6 +21,7 @@ public with sharing class RulesToScenariosCheck {
         WHERE Name LIKE :ruleName AND order__c != NULL
         ORDER BY order__c DESC
       ];
+      Map<Id, Scenario__c> scenarioMap = new Map<Id, Scenario__c>();
       for (Rule__c rule : rules) {
         String query = 'SELECT AppliedRule__c, ElementData1__c, ElementData2__c, ElementData3__c, ElementData4__c, ElementData5__c, ElementData6__c, Id FROM Scenario__c WHERE Name LIKE :scenarioName ';
         if (rule.ElementData1__c != null) {
@@ -44,14 +44,17 @@ public with sharing class RulesToScenariosCheck {
         }
         System.debug('query ' + query);
         List<Scenario__c> scenarios = Database.query(query);
-        System.debug('scenarios: ' + scenarios);
         for (Scenario__c scenario : scenarios) {
-          scenario.AppliedRule__c = rule.Id;
-          outputScenarios.add(scenario);
+          if (!scenarioMap.keySet().contains(scenario.Id)) {
+            scenario.AppliedRule__c = rule.Id;
+            scenarioMap.put(scenario.Id, scenario);
+          } else {
+            scenarioMap.get(scenario.Id).appliedRule__c = rule.Id;
+          }
         }
       }
 
-      output.records = outputScenarios;
+      output.records = scenarioMap.values();
       result.add(output);
     }
     return result;

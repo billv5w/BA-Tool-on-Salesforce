@@ -3,7 +3,7 @@
     <fullName>ElementData5__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
-    <label>Element Data 5</label>
+    <label>Variable 5</label>
     <referenceTo>ElementData__c</referenceTo>
     <relationshipLabel>Element Scenario 5</relationshipLabel>
     <relationshipName>Scenarios5</relationshipName>

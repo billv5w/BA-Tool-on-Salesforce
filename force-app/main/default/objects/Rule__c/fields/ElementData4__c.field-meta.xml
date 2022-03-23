@@ -3,7 +3,16 @@
     <fullName>ElementData4__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
-    <label>Element Data 4</label>
+    <label>Variable 4</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>ElementData__c.Order__c</field>
+            <operation>equals</operation>
+            <value>4</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
     <referenceTo>ElementData__c</referenceTo>
     <relationshipLabel>Element Rule 4</relationshipLabel>
     <relationshipName>Rules4</relationshipName>

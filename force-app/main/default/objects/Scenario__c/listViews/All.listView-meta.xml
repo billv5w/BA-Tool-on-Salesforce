@@ -2,7 +2,7 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
     <columns>NAME</columns>
-    <columns>CombinedScenario__c</columns>
+    <columns>CombinedElements__c</columns>
     <columns>Rule__c</columns>
     <columns>RuleOutcome__c</columns>
     <columns>ManualOutcome__c</columns>

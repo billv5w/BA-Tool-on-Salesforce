@@ -73,7 +73,7 @@ private class RulesToScenariosCheckTest {
       inputList
     );
     for (RulesToScenariosCheck.FlowOutputParameters output : result) {
-      System.assertEquals(32, output.records.size(), 'Number not matching');
+      System.assertEquals(24, output.records.size(), 'Number not matching');
     }
   }
 }
