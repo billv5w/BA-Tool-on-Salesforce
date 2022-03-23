@@ -1,54 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Create_Scenario_Records</name>
-        <label>Create Scenario Records</label>
+        <name>Create_Scenario_Records_from_Elements</name>
+        <label>Create Scenario Records from Elements</label>
         <locationX>182</locationX>
-        <locationY>1718</locationY>
-        <actionName>ScenarioCombinationGenerate</actionName>
+        <locationY>278</locationY>
+        <actionName>ScenarioFromElementsCreate</actionName>
         <actionType>apex</actionType>
         <connector>
             <targetReference>Assign_Count</targetReference>
         </connector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
-            <name>factor1</name>
-            <value>
-                <elementReference>factor1</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>factor2</name>
-            <value>
-                <elementReference>factor2</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>factor3</name>
-            <value>
-                <elementReference>factor3</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>factor4</name>
-            <value>
-                <elementReference>factor4</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>factor5</name>
-            <value>
-                <elementReference>factor5</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>factor6</name>
-            <value>
-                <elementReference>factor6</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>name</name>
+            <name>elementName</name>
             <value>
                 <elementReference>prefix</elementReference>
             </value>
@@ -60,120 +24,24 @@
         <name>Assign_Count</name>
         <label>Assign Count</label>
         <locationX>182</locationX>
-        <locationY>1838</locationY>
+        <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>scenarioCount</assignToReference>
             <operator>AssignCount</operator>
             <value>
                 <elementReference
-        >Create_Scenario_Records.records</elementReference>
+        >Create_Scenario_Records_from_Elements.records</elementReference>
             </value>
         </assignmentItems>
         <connector>
             <targetReference>Decision</targetReference>
         </connector>
     </assignments>
-    <assignments>
-        <name>Assign_List1</name>
-        <label>Assign List1</label>
-        <locationX>182</locationX>
-        <locationY>278</locationY>
-        <assignmentItems>
-            <assignToReference>currentList</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Factor1</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>collect_Elements_for_Factor1</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Assign_List2</name>
-        <label>Assign List2</label>
-        <locationX>182</locationX>
-        <locationY>518</locationY>
-        <assignmentItems>
-            <assignToReference>currentList</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Factor2</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>collect_Elements_for_Factor2</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Assign_List3</name>
-        <label>Assign List3</label>
-        <locationX>182</locationX>
-        <locationY>758</locationY>
-        <assignmentItems>
-            <assignToReference>currentList</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Factor3</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>collect_Elements_for_Factor3</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Assign_List4</name>
-        <label>Assign List4</label>
-        <locationX>182</locationX>
-        <locationY>998</locationY>
-        <assignmentItems>
-            <assignToReference>currentList</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Factor4</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>collect_Elements_for_Factor4</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Assign_List5</name>
-        <label>Assign List5</label>
-        <locationX>182</locationX>
-        <locationY>1238</locationY>
-        <assignmentItems>
-            <assignToReference>currentList</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Factor5</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>collect_Elements_for_Factor5</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Assign_List6</name>
-        <label>Assign List6</label>
-        <locationX>182</locationX>
-        <locationY>1478</locationY>
-        <assignmentItems>
-            <assignToReference>currentList</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Factor6</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>collect_Elements_for_Factor6</targetReference>
-        </connector>
-    </assignments>
     <decisions>
         <name>Decision</name>
         <label>Decision</label>
         <locationX>182</locationX>
-        <locationY>1958</locationY>
+        <locationY>518</locationY>
         <defaultConnector>
             <targetReference>TooManyScreen</targetReference>
         </defaultConnector>
@@ -220,22 +88,23 @@
         <name>Create_Scenarios</name>
         <label>Create Scenarios</label>
         <locationX>50</locationX>
-        <locationY>2078</locationY>
+        <locationY>638</locationY>
         <connector>
             <targetReference>EndScreen</targetReference>
         </connector>
-        <inputReference>Create_Scenario_Records.records</inputReference>
+        <inputReference
+    >Create_Scenario_Records_from_Elements.records</inputReference>
     </recordCreates>
     <screens>
         <name>EndScreen</name>
         <label>End Screen</label>
         <locationX>50</locationX>
-        <locationY>2198</locationY>
+        <locationY>758</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
-            <name>msg</name>
+            <name>msgEnd</name>
             <fieldText
       >&lt;p&gt;All {!scenarioCount} possible scenarios have been created.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
@@ -252,7 +121,8 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Assign_List1</targetReference>
+            <targetReference
+      >Create_Scenario_Records_from_Elements</targetReference>
         </connector>
         <fields>
             <name>prefix</name>
@@ -268,12 +138,12 @@
         <name>TooManyScreen</name>
         <label>Too Many Screen</label>
         <locationX>314</locationX>
-        <locationY>2078</locationY>
+        <locationY>638</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
-            <name>msg_0</name>
+            <name>msgTooMany</name>
             <fieldText
       >&lt;p&gt;Possible scenarios ({!scenarioCount}) have exceeded 10000. Please try to reduce them.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
@@ -288,173 +158,11 @@
             <targetReference>StartScreen</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
-    <subflows>
-        <name>collect_Elements_for_Factor1</name>
-        <label>collect Elements for Factor1</label>
-        <locationX>182</locationX>
-        <locationY>398</locationY>
-        <connector>
-            <targetReference>Assign_List2</targetReference>
-        </connector>
-        <flowName>Collect_Elements</flowName>
-        <inputAssignments>
-            <name>currentList</name>
-            <value>
-                <elementReference>currentList</elementReference>
-            </value>
-        </inputAssignments>
-        <outputAssignments>
-            <assignToReference>factor1</assignToReference>
-            <name>elements</name>
-        </outputAssignments>
-    </subflows>
-    <subflows>
-        <name>collect_Elements_for_Factor2</name>
-        <label>collect Elements for Factor2</label>
-        <locationX>182</locationX>
-        <locationY>638</locationY>
-        <connector>
-            <targetReference>Assign_List3</targetReference>
-        </connector>
-        <flowName>Collect_Elements</flowName>
-        <inputAssignments>
-            <name>currentList</name>
-            <value>
-                <elementReference>currentList</elementReference>
-            </value>
-        </inputAssignments>
-        <outputAssignments>
-            <assignToReference>factor2</assignToReference>
-            <name>elements</name>
-        </outputAssignments>
-    </subflows>
-    <subflows>
-        <name>collect_Elements_for_Factor3</name>
-        <label>collect Elements for Factor3</label>
-        <locationX>182</locationX>
-        <locationY>878</locationY>
-        <connector>
-            <targetReference>Assign_List4</targetReference>
-        </connector>
-        <flowName>Collect_Elements</flowName>
-        <inputAssignments>
-            <name>currentList</name>
-            <value>
-                <elementReference>currentList</elementReference>
-            </value>
-        </inputAssignments>
-        <outputAssignments>
-            <assignToReference>factor3</assignToReference>
-            <name>elements</name>
-        </outputAssignments>
-    </subflows>
-    <subflows>
-        <name>collect_Elements_for_Factor4</name>
-        <label>collect Elements for Factor4</label>
-        <locationX>182</locationX>
-        <locationY>1118</locationY>
-        <connector>
-            <targetReference>Assign_List5</targetReference>
-        </connector>
-        <flowName>Collect_Elements</flowName>
-        <inputAssignments>
-            <name>currentList</name>
-            <value>
-                <elementReference>currentList</elementReference>
-            </value>
-        </inputAssignments>
-        <outputAssignments>
-            <assignToReference>factor4</assignToReference>
-            <name>elements</name>
-        </outputAssignments>
-    </subflows>
-    <subflows>
-        <name>collect_Elements_for_Factor5</name>
-        <label>collect Elements for Factor5</label>
-        <locationX>182</locationX>
-        <locationY>1358</locationY>
-        <connector>
-            <targetReference>Assign_List6</targetReference>
-        </connector>
-        <flowName>Collect_Elements</flowName>
-        <inputAssignments>
-            <name>currentList</name>
-            <value>
-                <elementReference>currentList</elementReference>
-            </value>
-        </inputAssignments>
-        <outputAssignments>
-            <assignToReference>factor5</assignToReference>
-            <name>elements</name>
-        </outputAssignments>
-    </subflows>
-    <subflows>
-        <name>collect_Elements_for_Factor6</name>
-        <label>collect Elements for Factor6</label>
-        <locationX>182</locationX>
-        <locationY>1598</locationY>
-        <connector>
-            <targetReference>Create_Scenario_Records</targetReference>
-        </connector>
-        <flowName>Collect_Elements</flowName>
-        <inputAssignments>
-            <name>currentList</name>
-            <value>
-                <elementReference>currentList</elementReference>
-            </value>
-        </inputAssignments>
-        <outputAssignments>
-            <assignToReference>factor6</assignToReference>
-            <name>elements</name>
-        </outputAssignments>
-    </subflows>
+    <status>Active</status>
     <variables>
         <name>currentList</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>factor1</name>
-        <dataType>String</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>factor2</name>
-        <dataType>String</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>factor3</name>
-        <dataType>String</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>factor4</name>
-        <dataType>String</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>factor5</name>
-        <dataType>String</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>factor6</name>
-        <dataType>String</dataType>
-        <isCollection>true</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>

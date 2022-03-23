@@ -17,7 +17,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>flowName</name>
-                    <value>Create_Scenarios</value>
+                    <value>BAT_Create_Scenarios</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>height</name>
@@ -63,7 +63,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>flowName</name>
-                    <value>Create_Rule</value>
+                    <value>BAT_Apply_Rules</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>height</name>
@@ -78,7 +78,7 @@
                 <componentInstanceProperties>
                     <name>label</name>
                     <type>decorator</type>
-                    <value>Create Rules</value>
+                    <value>Apply Rules</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>scrollable</name>

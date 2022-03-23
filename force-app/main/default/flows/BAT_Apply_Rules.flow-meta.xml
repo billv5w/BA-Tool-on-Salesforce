@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Apply_all_rules</name>
+        <label>Apply all rules</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <actionName>RulesToScenariosCheck</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Update_Scenarios</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>scenario</name>
+            <value>
+                <elementReference>rulesPrefix</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>rule</name>
+            <value>
+                <elementReference>scenarioPrefix</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>54.0</apiVersion>
+    <interviewLabel>BAT Apply Rules {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>BAT Apply Rules</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordUpdates>
+        <name>Update_Scenarios</name>
+        <label>Update Scenarios</label>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
+        <inputReference>Apply_all_rules.records</inputReference>
+    </recordUpdates>
+    <screens>
+        <name>Start_Screen</name>
+        <label>Start Screen</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Apply_all_rules</targetReference>
+        </connector>
+        <fields>
+            <name>rulesPrefix</name>
+            <dataType>String</dataType>
+            <fieldText>Rules Prefix</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>scenarioPrefix</name>
+            <dataType>String</dataType>
+            <fieldText>Applied Scenario Prefix</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Start_Screen</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>
