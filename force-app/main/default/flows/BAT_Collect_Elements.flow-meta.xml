@@ -125,7 +125,8 @@
     <formulas>
         <name>elementName</name>
         <dataType>String</dataType>
-        <expression>{!prefix} +&apos; - &apos; + TEXT({!Order})</expression>
+        <expression
+    >{!prefix} + &apos;-&apos; + TEXT({!Order}) + &apos;-&apos; +{!Value}</expression>
     </formulas>
     <interviewLabel
   >BAT Collect Elements {!$Flow.CurrentDateTime}</interviewLabel>
@@ -255,7 +256,7 @@
             <targetReference>StartScreen</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Obsolete</status>
     <variables>
         <name>count</name>
         <dataType>Number</dataType>

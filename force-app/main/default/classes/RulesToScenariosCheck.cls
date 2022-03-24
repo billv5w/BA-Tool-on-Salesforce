@@ -46,10 +46,10 @@ public with sharing class RulesToScenariosCheck {
         List<Scenario__c> scenarios = Database.query(query);
         for (Scenario__c scenario : scenarios) {
           if (!scenarioMap.keySet().contains(scenario.Id)) {
-            scenario.AppliedRule__c = rule.Id;
+            scenario.Rule__c = rule.Id;
             scenarioMap.put(scenario.Id, scenario);
           } else {
-            scenarioMap.get(scenario.Id).appliedRule__c = rule.Id;
+            scenarioMap.get(scenario.Id).Rule__c = rule.Id;
           }
         }
       }

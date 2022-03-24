@@ -52,8 +52,27 @@
         <label>Update Scenarios</label>
         <locationX>176</locationX>
         <locationY>398</locationY>
+        <connector>
+            <targetReference>End_Screen</targetReference>
+        </connector>
         <inputReference>Apply_all_rules.records</inputReference>
     </recordUpdates>
+    <screens>
+        <name>End_Screen</name>
+        <label>End Screen</label>
+        <locationX>176</locationX>
+        <locationY>518</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>endMsg</name>
+            <fieldText>&lt;p&gt;Rules have been applied.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <name>Start_Screen</name>
         <label>Start Screen</label>

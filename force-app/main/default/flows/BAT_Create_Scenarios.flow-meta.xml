@@ -10,6 +10,9 @@
         <connector>
             <targetReference>Assign_Count</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>errorScreen</targetReference>
+        </faultConnector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>elementName</name>
@@ -100,13 +103,29 @@
         <label>End Screen</label>
         <locationX>50</locationX>
         <locationY>758</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>msgEnd</name>
             <fieldText
       >&lt;p&gt;All {!scenarioCount} possible scenarios have been created.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>errorScreen</name>
+        <label>errorScreen</label>
+        <locationX>578</locationX>
+        <locationY>398</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>errorMsg</name>
+            <fieldText>&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>

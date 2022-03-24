@@ -38,7 +38,9 @@ public with sharing class ScenarioFromElementsCreate {
               for (Integer e = 0; e < f5Size; e++) {
                 for (Integer f = 0; f < f6Size; f++) {
                   Scenario__c scenario = new Scenario__c(
-                    Name = prefix + '_' + String.valueOf(count).leftPad(5, '0'),
+                    Name = input.elementName +
+                      '_' +
+                      String.valueOf(count).leftPad(5, '0'),
                     ElementData1__c = factor1[a],
                     ElementData2__c = factor2[b],
                     ElementData3__c = factor3[c],
