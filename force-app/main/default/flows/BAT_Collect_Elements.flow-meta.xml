@@ -2,9 +2,25 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>54.0</apiVersion>
     <assignments>
+        <name>Add_to_List</name>
+        <label>Add to List</label>
+        <locationX>704</locationX>
+        <locationY>998</locationY>
+        <assignmentItems>
+            <assignToReference>elements</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>element</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>order_1</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Element</name>
         <label>Assign Element</label>
-        <locationX>314</locationX>
+        <locationX>176</locationX>
         <locationY>278</locationY>
         <assignmentItems>
             <assignToReference>element.Name</assignToReference>
@@ -67,9 +83,53 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Element_0</name>
+        <label>Assign Element</label>
+        <locationX>704</locationX>
+        <locationY>878</locationY>
+        <assignmentItems>
+            <assignToReference>element.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>elementName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>element.Description__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>same</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>element.Order__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>orderV</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>element.Value__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>same</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>count</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_to_List</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>order_1</name>
         <label>order + 1</label>
-        <locationX>578</locationX>
+        <locationX>440</locationX>
         <locationY>638</locationY>
         <assignmentItems>
             <assignToReference>orderV</assignToReference>
@@ -79,33 +139,65 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>StartScreen</targetReference>
+            <targetReference>Less_Than_7</targetReference>
         </connector>
     </assignments>
     <decisions>
+        <name>Less_Than_7</name>
+        <label>Less Than 7</label>
+        <locationX>440</locationX>
+        <locationY>758</locationY>
+        <defaultConnector>
+            <targetReference>Assign_Element_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>less_7_not_done</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>orderV</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>7.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>done</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>StartScreen</targetReference>
+            </connector>
+            <label>less 7 not done</label>
+        </rules>
+        <rules>
+            <name>more_than_6</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>orderV</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>6.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Elements</targetReference>
+            </connector>
+            <label>more than 6</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Need_More</name>
         <label>Need More?</label>
-        <locationX>314</locationX>
+        <locationX>176</locationX>
         <locationY>518</locationY>
         <defaultConnector>
             <targetReference>order_1</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>allDone</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>done</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>EndScreen</targetReference>
-            </connector>
-            <label>allDone</label>
-        </rules>
         <rules>
             <name>moreNeeded</name>
             <conditionLogic>and</conditionLogic>
@@ -126,7 +218,7 @@
         <name>elementName</name>
         <dataType>String</dataType>
         <expression
-    >{!prefix} + &apos;-&apos; + TEXT({!Order}) + &apos;-&apos; +{!Value}</expression>
+    >LEFT(({!prefix} + &apos;-&apos; + TEXT({!Order}) + &apos;-&apos; +{!Value}),80)</expression>
     </formulas>
     <interviewLabel
   >BAT Collect Elements {!$Flow.CurrentDateTime}</interviewLabel>
@@ -153,25 +245,35 @@
     <recordCreates>
         <name>Create_Element</name>
         <label>Create Element</label>
-        <locationX>314</locationX>
+        <locationX>176</locationX>
         <locationY>398</locationY>
         <connector>
             <targetReference>Need_More</targetReference>
         </connector>
         <inputReference>element</inputReference>
     </recordCreates>
+    <recordCreates>
+        <name>Create_Elements</name>
+        <label>Create Elements</label>
+        <locationX>440</locationX>
+        <locationY>878</locationY>
+        <connector>
+            <targetReference>EndScreen</targetReference>
+        </connector>
+        <inputReference>elements</inputReference>
+    </recordCreates>
     <screens>
         <name>EndScreen</name>
         <label>End Screen</label>
-        <locationX>50</locationX>
-        <locationY>638</locationY>
+        <locationX>440</locationX>
+        <locationY>998</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>endMsg</name>
             <fieldText
-      >&lt;p&gt;All {!count} elements of {!orderV} have been created.&lt;/p&gt;</fieldText>
+      >&lt;p&gt;All {!count} elements of 6 variables have been created.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -180,7 +282,7 @@
     <screens>
         <name>StartScreen</name>
         <label>Start Screen</label>
-        <locationX>314</locationX>
+        <locationX>176</locationX>
         <locationY>158</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -250,13 +352,13 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>188</locationX>
+        <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>StartScreen</targetReference>
         </connector>
     </start>
-    <status>Obsolete</status>
+    <status>Active</status>
     <variables>
         <name>count</name>
         <dataType>Number</dataType>
@@ -284,12 +386,23 @@
         <objectType>ElementData__c</objectType>
     </variables>
     <variables>
+        <name>elements</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ElementData__c</objectType>
+    </variables>
+    <variables>
         <name>orderV</name>
         <dataType>Number</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <scale>0</scale>
+        <value>
+            <numberValue>1.0</numberValue>
+        </value>
     </variables>
     <variables>
         <name>prefixV</name>
