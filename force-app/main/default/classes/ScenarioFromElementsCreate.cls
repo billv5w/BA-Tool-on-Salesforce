@@ -57,6 +57,9 @@ public with sharing class ScenarioFromElementsCreate {
         }
       }
 
+      List<List<ElementData__c>> scenarioList = processElementList(elements);
+
+      createCombinations(scenarioList);
       // outputScenarios = createScenarios(listOfElements, 0, currentScenarios, outputScenarios);
       output.records = scenarios;
       result.add(output);
@@ -82,28 +85,82 @@ public with sharing class ScenarioFromElementsCreate {
     return result;
   }
 
+  private static List<List<ElementData__c>> processElementList(
+    List<ElementData__c> elements
+  ) {
+    List<List<ElementData__c>> resultList = new List<List<ElementData__c>>();
+    Map<String, List<ElementData__c>> result = new Map<String, List<ElementData__c>>();
+    for (ElementData__c element : elements) {
+      if (!result.keySet().contains(String.valueOf(element.order__c))) {
+        result.put(
+          String.valueOf(element.order__c),
+          new List<ElementData__c>{ element }
+        );
+      } else {
+        result.get(String.valueOf(element.order__c)).add(element);
+      }
+    }
+    for (List<ElementData__c> elist : result.values()) {
+      resultList.add(elist);
+    }
+    return resultList;
+  }
+
   //TODO recursion version
-  //   private static List<Scenario__c> createScenarios(
-  //     List<List<String>> listOfElements,
-  //     Integer depth,
-  //     List<Scenario__c> current,
-  //     List<Scenario__c> result
-  //   ) {
-  //     if (depth == listOfElements.size()) {
-  //       for (String element : listOfElements.get(depth)) {
-  //         Scenario__c scenario = new Scenario__c(
-  //           Name = nameprefix + '_' + String.valueOf(count).leftPad(5, '0')
-  //         );
-  //       }
+  /**
+   * Given a list of factors in the form of strings, a full combinations
+   * of possible outcomes will be returned using a recursive method.
+   *
+   * @param factors
+   *
+   * @return
+   */
+  public static List<List<Object>> createCombinations(
+    List<List<Object>> factors
+  ) {
+    if (factors.isEmpty()) {
+      return new List<List<Object>>{ new List<Object>() };
+    }
 
-  //       result.addAll(current);
-  //     } else {
-  //       depth = depth + 1;
-  //       createScenarios(listOfElements, depth, current, result);
-  //     }
-  //     return result;
-  //   }
+    List<List<Object>> combinationsReturn = new List<List<Object>>();
+    for (
+      List<Object> combinations : createCombinations(
+        (List<List<Object>>) listPop(factors)
+      )
+    ) {
+      for (Object factor : factors.get(factors.size() - 1)) {
+        combinationsReturn.add(listPush(combinations, factor));
+      }
+    }
+    return combinationsReturn;
+  }
 
+  /**
+   * Push an item onto a list and return the result.
+   * This is useful when we are wanting to avoid immutability.
+   *
+   * @param lst
+   * @param obj
+   *
+   * @return
+   */
+  private static List<Object> listPush(List<Object> lst, Object obj) {
+    List<Object> listReturn = lst.clone();
+    listReturn.add(obj);
+    return listReturn;
+  }
+  /**
+   * Pop the last element off from the list, and return the result.
+   *
+   * @param lst
+   *
+   * @return
+   */
+  private static List<Object> listPop(List<Object> lst) {
+    List<Object> listReturn = lst.clone();
+    listReturn.remove(lst.size() - 1);
+    return listReturn;
+  }
   /* Input parameters for the Apex action */
   public class FlowInputParameters {
     @InvocableVariable(label='Element Data Name Prefix' required=true)
