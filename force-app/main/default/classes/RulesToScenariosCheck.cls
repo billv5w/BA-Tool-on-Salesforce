@@ -1,49 +1,47 @@
 public with sharing class RulesToScenariosCheck {
-  @InvocableMethod(label='Apply all rules')
-  public static List<FlowOutputParameters> applyRules(
-    List<FlowInputParameters> inputList
-  ) {
+
+  @InvocableMethod(Label='Apply all rules')
+  public static List<FlowOutputParameters> applyRules(List<FlowInputParameters> inputList)
+  {
     List<FlowOutputParameters> result = new List<FlowOutputParameters>();
+
     for (FlowInputParameters input : inputList) {
       FlowOutputParameters output = new FlowOutputParameters();
+      List<Scenario__c> outputScenarios = new List<Scenario__c>();
+
+      // Get a list of ElementData field names dynamically.
+      List<String> fieldElements = getFieldNamesContain(Rule__c.getSObjectType(), 'ElementData');
       String ruleName = input.rule + '%';
       String scenarioName = input.scenario + '%';
-      List<Rule__c> rules = [
-        SELECT
-          ElementData1__c,
-          ElementData2__c,
-          ElementData3__c,
-          ElementData4__c,
-          ElementData5__c,
-          ElementData6__c,
-          Id
-        FROM Rule__c
-        WHERE Name LIKE :ruleName AND order__c != NULL
-        ORDER BY order__c DESC
-      ];
+
+      List<Rule__c> rules = Database.query(
+        'SELECT '
+          + String.join(fieldElements, ',') + ' '
+          + 'FROM Rule__c '
+          + 'WHERE Name LIKE :ruleName AND Order__c != NULL '
+          + 'ORDER BY Order__c DESC'
+      );
       Map<Id, Scenario__c> scenarioMap = new Map<Id, Scenario__c>();
       for (Rule__c rule : rules) {
-        String query = 'SELECT AppliedRule__c, ElementData1__c, ElementData2__c, ElementData3__c, ElementData4__c, ElementData5__c, ElementData6__c, Id FROM Scenario__c WHERE Name LIKE :scenarioName ';
-        if (rule.ElementData1__c != null) {
-          query += ' AND ElementData1__c = \'' + rule.ElementData1__c + '\'';
+        // Build a list of filters based on non-null values.
+        List<String> queryFilter = new List<String>{''};
+        for (String fieldName : fieldElements) {
+          if (rule.get(fieldName) != null) {
+            queryFilter.add(fieldName + ' = ' + '\'' + rule.get(fieldName) + '\'');
+          }
         }
-        if (rule.ElementData2__c != null) {
-          query += ' AND ElementData2__c = \'' + rule.ElementData2__c + '\'';
-        }
-        if (rule.ElementData3__c != null) {
-          query += ' AND ElementData3__c = \'' + rule.ElementData3__c + '\'';
-        }
-        if (rule.ElementData4__c != null) {
-          query += ' AND ElementData4__c = \'' + rule.ElementData4__c + '\'';
-        }
-        if (rule.ElementData5__c != null) {
-          query += ' AND ElementData5__c = \'' + rule.ElementData5__c + '\'';
-        }
-        if (rule.ElementData6__c != null) {
-          query += ' AND ElementData6__c = \'' + rule.ElementData6__c + '\'';
-        }
-        System.debug('query ' + query);
+
+        String query =
+          'SELECT AppliedRule__c, ' + String.join(fieldElements, ', ') + ' '
+            + 'FROM Scenario__c '
+            + 'WHERE Name LIKE :scenarioName '
+            + String.join(queryFilter, 'AND ') + ' '
+        ;
+        System.debug(LoggingLevel.INFO, query);
+
         List<Scenario__c> scenarios = Database.query(query);
+        System.debug(LoggingLevel.DEBUG, 'Scenarios: ' + scenarios);
+
         for (Scenario__c scenario : scenarios) {
           if (!scenarioMap.keySet().contains(scenario.Id)) {
             scenario.Rule__c = rule.Id;
@@ -53,11 +51,31 @@ public with sharing class RulesToScenariosCheck {
           }
         }
       }
-
       output.records = scenarioMap.values();
       result.add(output);
     }
     return result;
+  }
+
+  /**
+   * Given an SObjectType, filter the fields that contain a string.
+   *
+   * @param sObjectType
+   * @param strContains
+   *
+   * @return
+   */
+  private static List<String> getFieldNamesContain(SObjectType sObjectType, String strContains)
+  {
+    Set<String> fieldNames = sObjectType.getDescribe().fields.getMap().keySet();
+    List<String> fieldNamesChosen = new List<String>();
+
+    for (String fieldName : fieldNames) {
+      if (fieldName.containsIgnoreCase(strContains)) {
+        fieldNamesChosen.add(fieldName);
+      }
+    }
+    return fieldNamesChosen;
   }
 
   /* Input parameters for the Apex action */
